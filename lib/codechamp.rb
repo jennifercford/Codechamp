@@ -39,13 +39,14 @@ module Codechamp
       users = contributer_list.map do |x|
         user = x["author"]["login"]
         week = x["weeks"]
+        commits = x["total"]
         add = week.map {|x| x["a"]}
         total_additions = add.inject(0) {|sum,x| sum + x }
         del = week.map {|x| x["d"]}
         deletions = del.inject(0) {|sum,x| sum + x}
         changes = week.map {|x| x["c"]}
         total_changes = changes.inject(0) {|sum,x| sum + x}
-        [user,total_additions,deletions,total_changes]
+        [user,total_additions,deletions,total_changes,commits]
  # binding.pry
       end
       users.sort_by { |x| x.last}
