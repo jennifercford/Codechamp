@@ -52,8 +52,12 @@ module Codechamp
       puts "1) lines added 2) lines deleted 3) total lines changed 4) commits made"
       c = gets.chomp.to_i
       puts "Usernames, Additions, Deletions, Changes, Commits"
-      d = users.sort_by { |x| -x[c] }.join("\n")
-      puts "#{d}"
+      d = users.sort_by { |x| -x[c] }
+      # puts "#{d}"
+      # binding.pry
+      d.each_slice(1) { |x|
+        puts x.join(", ")
+      }
       # puts "Usernames"
       # users.each do |user|
       #   puts "#{user}, #{week}"
