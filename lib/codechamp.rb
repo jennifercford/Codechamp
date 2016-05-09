@@ -35,7 +35,6 @@ module Codechamp
     def do_important_work
       get_owner_and_repo
       contributer_list = @github.get_contributors(@owner,@repo)
-      # @processed_data = []
       users = contributer_list.map do |x|
         user = x["author"]["login"]
         week = x["weeks"]
@@ -53,57 +52,14 @@ module Codechamp
       c = gets.chomp.to_i
       puts "Usernames, Additions, Deletions, Changes, Commits"
       d = users.sort_by { |x| -x[c] }
-      # puts "#{d}"
-      # binding.pry
       d.each_slice(1) { |x|
         puts x.join(", ")
       }
-      # puts "Usernames"
-      # users.each do |user|
-      #   puts "#{user}, #{week}"
-      # end
-        # @processed_data.push(data)
-        #first need a loop to get username and make it a hash key
-        #then need to loop over weeks and retreive add, deletion, and commits and attach
-        #to username key
-        #then make method to sort the values add, delete, and commits diff orders
-      # end
-      # @processed_data
     end
-    def data_processer
-      # user
-      # username = user["author"]["login"]
-      # additions = user.each["weeks"]["a"]#loop to add
-      # deletions = user["weeks"]["d"]
-      # commits = user["weeks"]["c"]
-    end
-
-    # def sort
-    #   @processed_data
-    # end
-
   end
 end
 
 
 app = Codechamp::App.new
 app.connect_github
-#app.get_owner_and_repo
 app.do_important_work
-#organized_data = app.do_important_work
-#app.sort(organized_data)
-
-
-#   #loop to get all users using response each ["author"]["login"]
-# end
-# def get_added
-# end
-# def get_deleted
-# end
-# def get_commits
-# end
-# def hash_them_together
-# end
-
-# def sum_weeks(weeks, key) # additions = sum_weeks(user["weeks"], "a") => 312
-# end
