@@ -49,7 +49,7 @@ module Codechamp
         [user,total_additions,deletions,total_changes,commits]
  # binding.pry
       end
-      puts "How would you like this sorted by?"
+      puts "How would you like this sorted by? Please pick a number"
       puts "1) lines added 2) lines deleted 3) total lines changed 4) commits made"
       c = gets.chomp.to_i
       puts "Usernames, Additions, Deletions, Changes, Commits"
