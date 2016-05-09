@@ -49,8 +49,12 @@ module Codechamp
         [user,total_additions,deletions,total_changes,commits]
  # binding.pry
       end
-      users.sort_by { |x| x.last}
-   binding.pry
+      puts "How would you like this sorted by?"
+      puts "1) lines added 2) lines deleted 3) total lines changed 4) commits made"
+      c = gets.chomp.to_i
+      puts "Usernames, Additions, Deletions, Changes, Commits"
+      puts "#{users.sort_by { |x| -x[c]}}"
+  #  binding.pry
       # puts "Usernames"
       # users.each do |user|
       #   puts "#{user}, #{week}"
