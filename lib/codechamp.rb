@@ -41,13 +41,15 @@ module Codechamp
         week = x["weeks"]
         add = week.map {|x| x["a"]}
         total_additions = add.inject(0) {|sum,x| sum + x }
-        [user,total_additions]
-# binding.pry
+        del = week.map {|x| x["d"]}
+        deletions = del.inject(0) {|sum,x| sum + x}
+        changes = week.map {|x| x["c"]}
+        total_changes = changes.inject(0) {|sum,x| sum + x}
+        [user,total_additions,deletions,total_changes]
+ # binding.pry
       end
-
-
       users.sort_by { |x| x.last}
-  binding.pry
+   binding.pry
       # puts "Usernames"
       # users.each do |user|
       #   puts "#{user}, #{week}"
