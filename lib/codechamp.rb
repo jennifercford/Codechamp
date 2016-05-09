@@ -31,31 +31,69 @@ module Codechamp
       @repo = prompt("What Github repo do you want to access?",
       /^[a-z0-9\-\_]{6,20}$/i)
     end
-    def get_user
-      #loop to get all users using response each ["author"]["login"]
-    end
-    def get_added
-    end
-    def get_deleted
-    end
-    def get_commits
-    end
-    def hash_them_together
-    end
 
     def do_important_work
       get_owner_and_repo
-      response = @github.get_contributors(@owner,@repo)
-      #Need logical loop to retreive each user
-      #need retreive each a ,d , and c
-      users = response.each {|x["author"]["login"]| puts "#{x["author"]["login"]}" }
-      binding.pry
+      contributer_list = @github.get_contributors(@owner,@repo)
+      # @processed_data = []
+      users = contributer_list.map do |x|
+        user = x["author"]["login"]
+        week = x["weeks"]
+        add = week.map {|x| x["a"]}
+        total_additions = add.inject(0) {|sum,x| sum + x }
+        [user,total_additions]
+# binding.pry
+      end
+
+
+      users.sort_by { |x| x.last}
+  binding.pry
+      # puts "Usernames"
+      # users.each do |user|
+      #   puts "#{user}, #{week}"
+      # end
+        # @processed_data.push(data)
+        #first need a loop to get username and make it a hash key
+        #then need to loop over weeks and retreive add, deletion, and commits and attach
+        #to username key
+        #then make method to sort the values add, delete, and commits diff orders
+      # end
+      # @processed_data
     end
+    def data_processer
+      # user
+      # username = user["author"]["login"]
+      # additions = user.each["weeks"]["a"]#loop to add
+      # deletions = user["weeks"]["d"]
+      # commits = user["weeks"]["c"]
+    end
+
+    # def sort
+    #   @processed_data
+    # end
+
   end
 end
 
 
 app = Codechamp::App.new
 app.connect_github
-# app.get_owner_and_repo
+#app.get_owner_and_repo
 app.do_important_work
+#organized_data = app.do_important_work
+#app.sort(organized_data)
+
+
+#   #loop to get all users using response each ["author"]["login"]
+# end
+# def get_added
+# end
+# def get_deleted
+# end
+# def get_commits
+# end
+# def hash_them_together
+# end
+
+# def sum_weeks(weeks, key) # additions = sum_weeks(user["weeks"], "a") => 312
+# end
